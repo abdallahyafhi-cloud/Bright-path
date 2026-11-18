@@ -210,7 +210,7 @@ let data=load();
 function profile(n){if(!data[n])data[n]={stars:0,done:0,correct:0,badges:[],history:[],exams:[],weak:{},items:[]};return data[n]}
 function save(){localStorage.setItem(storeKey,JSON.stringify(data));refresh()}
 function setChild(n){if(n!==child){signOut();chooseLoginChild(n);return}child=n;document.getElementById("adamBtn").classList.toggle("active",n==="Adam");document.getElementById("eileenBtn").classList.toggle("active",n==="Eileen");refresh();show(page)}
-function show(id){page=id;document.querySelectorAll(".page").forEach(x=>x.classList.add("hidden"));document.getElementById(id).classList.remove("hidden");document.querySelectorAll(".nav button").forEach(x=>x.classList.toggle("active",x.dataset.page===id));if(id==="parent")renderParent();if(id==="exams")renderExams();if(id==="rewards")renderRewards();if(id==="english")renderSkills();if(id==="math")renderMath();if(id==="vocabulary")document.getElementById("vocabLaunch").innerHTML='<div class="panel"><p>Practice word meanings, synonyms, antonyms, prefixes and context clues.</p><button class="btn" onclick="startPractice(\\'vocabulary\\')">Start vocabulary practice</button></div>'}
+function show(id){page=id;document.querySelectorAll(".page").forEach(x=>x.classList.add("hidden"));document.getElementById(id).classList.remove("hidden");document.querySelectorAll(".nav button").forEach(x=>x.classList.toggle("active",x.dataset.page===id));if(id==="parent")renderParent();if(id==="exams")renderExams();if(id==="rewards")renderRewards();if(id==="english")renderSkills();if(id==="math")renderMath();if(id==="vocabulary")document.getElementById("vocabLaunch").innerHTML='<div class="panel"><p>Practice word meanings, synonyms, antonyms, prefixes and context clues.</p><button class="btn" onclick="startPractice(\'vocabulary\')">Start vocabulary practice</button></div>'}
 function refresh(){let p=profile(child),sonic=child==="Adam";document.getElementById("welcomeTitle").textContent="Welcome back, "+child+"!";document.getElementById("heroName").textContent=child;document.getElementById("heroAvatar").textContent=sonic?"🦔":"🐰";document.getElementById("worldName").textContent=sonic?"SONIC WORLD":"KUROMI WORLD";document.getElementById("homeStars").textContent=p.stars+" ⭐";document.getElementById("statStars").textContent=p.stars;document.getElementById("statDone").textContent=p.done;document.getElementById("statCorrect").textContent=p.correct;document.getElementById("statBadges").textContent=p.badges.length;document.getElementById("rewardStars").textContent=p.stars+" stars"}
 function renderSkills(){document.getElementById("englishSkills").innerHTML=englishGroups.map(([g,skills])=>`<div class="panel"><b>${g}</b><p class="muted small">${skills.length} skill areas</p><div class="row" style="margin-top:10px"><button class="btn soft" onclick="startPractice('english')">Practice this area →</button></div><details style="margin-top:10px"><summary class="small muted">View skill list</summary><p class="small">${skills.join(" · ")}</p></details></div>`).join("")}
 function renderMath(){document.getElementById("mathSkills").innerHTML=mathGroups.map(g=>`<button class="skill" onclick="startPractice('math')"><b>${g}</b><small>Grade 2 · Practice</small></button>`).join("")}
@@ -237,4 +237,60 @@ function buyItem(name,cost){let p=profile(child);if(p.items.includes(name)){aler
 function exportData(){let blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"}),a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="bright-path-progress.json";a.click();URL.revokeObjectURL(a.href)}
 function resetCurrent(){if(confirm("Reset all progress for "+child+" on this browser?")){delete data[child];save();renderParent()}}
 refresh();renderSkills();renderMath();renderExams();
-</script></body></html>
+</script>
+<script>
+/* Bright Path runtime guard and resilient login controls */
+(function () {
+  function showRuntimeError(message) {
+    var box = document.getElementById("runtimeNotice");
+    if (!box) {
+      box = document.createElement("div");
+      box.id = "runtimeNotice";
+      box.style.cssText = "position:fixed;left:12px;right:12px;bottom:12px;z-index:99999;background:#fff0f3;color:#9b1c3c;border:2px solid #e78aa0;border-radius:12px;padding:12px;font:14px Arial;box-shadow:0 8px 30px #0002";
+      document.body.appendChild(box);
+    }
+    box.textContent = "Bright Path needs a page refresh. " + message;
+  }
+  window.addEventListener("error", function (event) {
+    showRuntimeError(event.message || "A script error occurred.");
+  });
+  window.addEventListener("unhandledrejection", function (event) {
+    showRuntimeError(event.reason && event.reason.message ? event.reason.message : "A background script error occurred.");
+  });
+
+  function bindAuthControls() {
+    var setup = document.querySelector("#authGate .auth-card button.btn.soft");
+    var adam = document.getElementById("authAdam");
+    var eileen = document.getElementById("authEileen");
+    var submit = document.getElementById("authSubmit");
+    if (setup) {
+      setup.removeAttribute("onclick");
+      setup.type = "button";
+      setup.addEventListener("click", function (e) {
+        e.preventDefault();
+        try {
+          if (typeof window.showSetup === "function") window.showSetup();
+          else showRuntimeError("The account setup function did not load. Please refresh the page.");
+        } catch (err) { showRuntimeError(err.message); }
+      });
+    }
+    if (adam) { adam.removeAttribute("onclick"); adam.type = "button"; adam.addEventListener("click", function(){ try { window.chooseLoginChild("Adam"); } catch(err){showRuntimeError(err.message);} }); }
+    if (eileen) { eileen.removeAttribute("onclick"); eileen.type = "button"; eileen.addEventListener("click", function(){ try { window.chooseLoginChild("Eileen"); } catch(err){showRuntimeError(err.message);} }); }
+    if (submit) {
+      submit.removeAttribute("onclick");
+      submit.type = "button";
+      submit.addEventListener("click", function(e){
+        e.preventDefault();
+        try {
+          if (typeof window.submitLogin === "function") window.submitLogin();
+          else showRuntimeError("The sign-in function did not load. Please refresh the page.");
+        } catch(err){showRuntimeError(err.message);}
+      });
+    }
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", bindAuthControls);
+  else bindAuthControls();
+})();
+</script>
+
+</body></html>
