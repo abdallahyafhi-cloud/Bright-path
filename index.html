@@ -36,6 +36,9 @@ footer{color:#98a1b4;font-size:11px;text-align:center;padding:24px}
 .auth-field{margin:12px 0}.auth-field label{display:block;font-size:12px;font-weight:850;color:#66728a;margin-bottom:6px}
 .auth-error{color:#b4234a;font-size:12px;font-weight:750;min-height:18px}
 .auth-note{font-size:11px;color:#8b95a8!important}
+
+.exam-timer{display:none;align-items:center;gap:7px;padding:9px 13px;border-radius:12px;background:#fff1e8;color:#9a3d16;font-weight:800;font-variant-numeric:tabular-nums}
+.exam-timer.active{display:inline-flex}.lesson-note{margin:14px 0;padding:12px 15px;border-radius:13px;background:#f1f0ff;border-left:4px solid #7770e8}.lesson-note b{display:block;margin-bottom:4px}.exam-day{font-size:12px;color:#6b65a8;font-weight:700}
 </style></head>
 <body>
 
@@ -100,14 +103,17 @@ footer{color:#98a1b4;font-size:11px;text-align:center;padding:24px}
 <section id="vocabulary" class="page hidden"><div class="welcome"><div><h1>Vocabulary Builder</h1><p class="muted">Choose the best word for each sentence.</p></div></div><div id="vocabLaunch"></div></section>
 <section id="listening" class="page hidden"><div class="welcome"><div><h1>Listening Lab</h1><p class="muted">Listen carefully, then choose your answer.</p></div></div><div class="panel"><p>Questions can be read aloud using the American English voice available in your browser.</p><button class="btn" onclick="startPractice('listening')">Start listening practice 🎧</button></div></section>
 <section id="speaking" class="page hidden"><div class="welcome"><div><h1>Speaking Studio</h1><p class="muted">Speak clearly and confidently.</p></div></div><div class="panel"><h3>Today's conversation</h3><p id="speakPrompt">Tell me about your favorite animal. What does it look like? What does it eat?</p><div class="row"><button class="btn pink" onclick="speakPrompt()">🔊 Hear the prompt</button><button class="btn" onclick="startMic()">🎙️ Start speaking</button><button class="btn soft" onclick="stopMic()">Stop</button></div><p class="muted small">Your browser may ask for microphone permission. Speech recognition availability depends on your browser and device.</p><textarea id="speechText" placeholder="Your recognized speech will appear here. You can also type your answer..."></textarea><div class="row"><button class="btn blue" onclick="checkSpeaking()">Check my practice</button><span id="speechFeedback" class="muted small"></span></div></div><div class="panel"><h3>Conversation topics</h3><div class="row" id="topics"></div></div></section>
-<section id="exams" class="page hidden"><div class="welcome"><div><h1>Exam Center</h1><p class="muted">Practice tests and track your results.</p></div></div><div class="grid subjects"><button class="subject" onclick="startExam('weekly')"><span class="icon">🗓️</span><h3>Weekly Quiz</h3><p>10 questions · Score out of 30.</p></button><button class="subject" onclick="startExam('midterm')"><span class="icon">📘</span><h3>Midterm Practice</h3><p>30 questions · Score out of 30.</p></button><button class="subject" onclick="startExam('final')"><span class="icon">🎓</span><h3>Final Practice</h3><p>30 questions · Score out of 30.</p></button></div><div class="panel"><h3>My exam history</h3><div id="examHistory" class="muted">No exams completed yet.</div></div></section>
+<section id="exams" class="page hidden"><div class="welcome"><div><h1>Exam Center</h1><p class="muted">Practice tests and track your results.</p></div></div><div class="grid subjects"><button class="subject" onclick="startExam('weekly')"><span class="icon">🗓️</span><h3>Friday Weekly Exam</h3><span class="exam-day">Every Friday</span><p>30 questions · 30 minutes · Every Friday.</p></button><button class="subject" onclick="startExam('midterm')"><span class="icon">📘</span><h3>Midterm Practice</h3><p>30 questions · Score out of 30.</p></button><button class="subject" onclick="startExam('final')"><span class="icon">🎓</span><h3>Final Practice</h3><p>30 questions · Score out of 30.</p></button></div><div class="panel"><h3>My exam history</h3><div id="examHistory" class="muted">No exams completed yet.</div></div></section>
 <section id="rewards" class="page hidden"><div class="welcome"><div><h1>Rewards & My Room</h1><p class="muted">Your effort earns stars. Keep collecting!</p></div></div><div class="panel"><h2>⭐ Star Treasure</h2><div class="reward" id="rewardStars">0 stars</div><p class="muted">Earn 10 stars for each correct answer. Incorrect answers never remove stars.</p><h3>My trophies</h3><div id="trophies" class="row"></div></div><div class="panel"><h2>🏡 Room Decor</h2><p class="muted">Spend stars to unlock room decorations.</p><div class="row"><button class="btn soft" onclick="buyItem('Rainbow lamp',30)">🌈 Rainbow Lamp · 30 ⭐</button><button class="btn soft" onclick="buyItem('Star rug',50)">🌟 Star Rug · 50 ⭐</button><button class="btn soft" onclick="buyItem('Golden trophy',80)">🏆 Golden Trophy · 80 ⭐</button></div><div id="roomItems" class="row" style="margin-top:15px"></div></div></section>
-<section id="parent" class="page hidden"><div class="welcome"><div><h1>Parent Dashboard</h1><p class="muted">Review progress, accuracy and practice history.</p></div><span class="badge">Family overview</span></div><div class="grid two"><div class="panel"><h3>Learning progress</h3><div id="parentStats"></div></div><div class="panel"><h3>Skills to practice</h3><div id="weakSkills" class="muted small"></div></div></div><div class="panel"><h3>Activity history</h3><div id="history"></div></div><div class="panel"><h3>Parent notes</h3><p class="muted small">This prototype stores progress in this browser on this device. Use export to save a backup.</p><div class="row"><button class="btn soft" onclick="signOut();showSetup()">Manage child accounts</button><button class="btn" onclick="exportData()">Export progress</button><button class="btn ghost" onclick="resetCurrent()">Reset selected learner</button></div></div></section>
+<section id="parent" class="page hidden"><div class="welcome"><div><h1>Parent Dashboard</h1><p class="muted">Review progress, accuracy and practice history.</p></div><span class="badge">Family overview</span></div><div class="grid two"><div class="panel"><h3>Learning progress</h3><div id="parentStats"></div></div><div class="panel"><h3>Skills to practice</h3><div id="weakSkills" class="muted small"></div></div></div>
+<div class="panel"><div class="row between"><div><h3>📊 Learning MAP — Skill Strengths & Growth Areas</h3><p class="muted small">A skill-by-skill snapshot based on answers recorded in Bright Path.</p></div><span class="badge">MAP-style view</span></div><div id="skillMap"></div><div class="muted small" style="margin-top:12px">Levels are learning indicators, not official NWEA MAP scores or percentiles. A skill needs at least 3 recorded answers before it receives a level.</div></div>
+<div class="panel"><h3>Activity history</h3><div id="history"></div></div><div class="panel"><h3>Parent notes</h3><p class="muted small">This prototype stores progress in this browser on this device. Use export to save a backup.</p><div class="row"><button class="btn soft" onclick="signOut();showSetup()">Manage child accounts</button><button class="btn" onclick="exportData()">Export progress</button><button class="btn ghost" onclick="resetCurrent()">Reset selected learner</button></div></div></section>
 
 <section id="activity" class="page hidden">
  <div class="welcome"><div><h1 id="activityTitle">Practice Time!</h1><p class="muted" id="activitySubtitle">Choose the correct answer.</p></div><button class="btn ghost" onclick="show('home')">✕ Exit</button></div>
  <div class="question-card">
- <div class="qmeta"><span id="qCategory">ENGLISH</span><span id="qCount">Question 1</span></div>
+ <div class="qmeta"><span id="qCategory">ENGLISH</span><span id="qCount">Question 1</span><span id="examTimer" class="exam-timer">⏱ 30:00</span></div>
+ <div id="lessonNote" class="lesson-note" style="display:none"></div>
  <div class="progress" style="margin-top:12px"><i id="qProgress" style="width:0%"></i></div>
  <div class="qtext" id="qText"></div>
  <div class="row" style="margin-bottom:13px"><button class="btn soft" onclick="readQuestion()">🔊 Listen</button><span class="muted small">American English voice when available</span></div>
@@ -204,22 +210,72 @@ const questions = [
 {cat:"Math",skill:"Data and Graphs",q:"A chart shows 6 children like apples and 4 like pears. How many children are counted?",a:["2","8","10","12"],c:2,why:"6 + 4 = 10."}
 ];
 let child="Adam",page="home",deck=[],idx=0,answered=false,examMode="",examAnswers=0,recognition=null;
+let examSeconds=1800, examClock=null, examFinished=false;
 const storeKey="brightPathGrade2_v1";
 function load(){try{return JSON.parse(localStorage.getItem(storeKey))||{}}catch(e){return {}}}
 let data=load();
 function profile(n){if(!data[n])data[n]={stars:0,done:0,correct:0,badges:[],history:[],exams:[],weak:{},items:[]};return data[n]}
 function save(){localStorage.setItem(storeKey,JSON.stringify(data));refresh()}
 function setChild(n){if(n!==child){signOut();chooseLoginChild(n);return}child=n;document.getElementById("adamBtn").classList.toggle("active",n==="Adam");document.getElementById("eileenBtn").classList.toggle("active",n==="Eileen");refresh();show(page)}
-function show(id){page=id;document.querySelectorAll(".page").forEach(x=>x.classList.add("hidden"));document.getElementById(id).classList.remove("hidden");document.querySelectorAll(".nav button").forEach(x=>x.classList.toggle("active",x.dataset.page===id));if(id==="parent")renderParent();if(id==="exams")renderExams();if(id==="rewards")renderRewards();if(id==="english")renderSkills();if(id==="math")renderMath();if(id==="vocabulary")document.getElementById("vocabLaunch").innerHTML='<div class="panel"><p>Practice word meanings, synonyms, antonyms, prefixes and context clues.</p><button class="btn" onclick="startPractice(\'vocabulary\')">Start vocabulary practice</button></div>'}
+function show(id){page=id;document.querySelectorAll(".page").forEach(x=>x.classList.add("hidden"));document.getElementById(id).classList.remove("hidden");document.querySelectorAll(".nav button").forEach(x=>x.classList.toggle("active",x.dataset.page===id));if(id==="parent")renderParent();if(id==="exams")renderExams();if(id==="rewards")renderRewards();if(id==="english")renderSkills();if(id==="math")renderMath();if(id==="vocabulary")document.getElementById("vocabLaunch").innerHTML=`<div class="panel"><p>Practice word meanings, synonyms, antonyms, prefixes and context clues.</p><button class="btn" onclick="startPractice('vocabulary')">Start vocabulary practice</button></div>`}
 function refresh(){let p=profile(child),sonic=child==="Adam";document.getElementById("welcomeTitle").textContent="Welcome back, "+child+"!";document.getElementById("heroName").textContent=child;document.getElementById("heroAvatar").textContent=sonic?"🦔":"🐰";document.getElementById("worldName").textContent=sonic?"SONIC WORLD":"KUROMI WORLD";document.getElementById("homeStars").textContent=p.stars+" ⭐";document.getElementById("statStars").textContent=p.stars;document.getElementById("statDone").textContent=p.done;document.getElementById("statCorrect").textContent=p.correct;document.getElementById("statBadges").textContent=p.badges.length;document.getElementById("rewardStars").textContent=p.stars+" stars"}
 function renderSkills(){document.getElementById("englishSkills").innerHTML=englishGroups.map(([g,skills])=>`<div class="panel"><b>${g}</b><p class="muted small">${skills.length} skill areas</p><div class="row" style="margin-top:10px"><button class="btn soft" onclick="startPractice('english')">Practice this area →</button></div><details style="margin-top:10px"><summary class="small muted">View skill list</summary><p class="small">${skills.join(" · ")}</p></details></div>`).join("")}
 function renderMath(){document.getElementById("mathSkills").innerHTML=mathGroups.map(g=>`<button class="skill" onclick="startPractice('math')"><b>${g}</b><small>Grade 2 · Practice</small></button>`).join("")}
-function selectDeck(type){let list=questions.filter(q=>type==="mixed"?true:type==="english"?q.cat!=="Math"&&q.cat!=="Listening":type==="math"?q.cat==="Math":type==="vocabulary"?q.cat==="Vocabulary":type==="listening"?q.cat==="Listening":true);if(!list.length)list=questions;return list.sort(()=>Math.random()-.5)}
-function startPractice(type){examMode="";deck=selectDeck(type).slice(0,10);idx=0;examAnswers=0;document.getElementById("activityTitle").textContent=type==="listening"?"Listening Lab":type==="math"?"Math Adventure":type==="vocabulary"?"Vocabulary Builder":"Practice Time!";document.getElementById("activitySubtitle").textContent="Choose the best answer. You earn 10 stars for each correct answer.";show("activity");renderQuestion()}
-function startExam(kind){examMode=kind;deck=selectDeck("mixed").slice(0,kind==="weekly"?10:30);idx=0;examAnswers=0;document.getElementById("activityTitle").textContent=kind==="weekly"?"Weekly Quiz":kind==="midterm"?"Midterm Practice":"Final Practice";document.getElementById("activitySubtitle").textContent=deck.length+" questions · Final score out of 30.";show("activity");renderQuestion()}
-function renderQuestion(){answered=false;let q=deck[idx];document.getElementById("qCategory").textContent=q.cat.toUpperCase()+" · "+q.skill.toUpperCase();document.getElementById("qCount").textContent="Question "+(idx+1)+" of "+deck.length;document.getElementById("qProgress").style.width=(idx/deck.length*100)+"%";document.getElementById("qText").textContent=q.q;document.getElementById("feedback").innerHTML="";document.getElementById("earned").textContent="";document.getElementById("nextBtn").disabled=true;document.getElementById("nextBtn").textContent=idx===deck.length-1?(examMode?"Finish exam":"Finish practice"):"Next question →";document.getElementById("qOptions").innerHTML=q.a.map((a,i)=>`<button class="option" onclick="answer(${i})">${String.fromCharCode(65+i)}. ${a}</button>`).join("");}
+function selectDeck(type){
+ let p=profile(child);
+ let list=questions.filter(q=>type==="mixed"?true:type==="english"?q.cat!=="Math"&&q.cat!=="Listening":type==="math"?q.cat==="Math":type==="vocabulary"?q.cat==="Vocabulary":type==="listening"?q.cat==="Listening":true);
+ if(!list.length)list=questions;
+ const seen=new Set((p.history||[]).map(h=>h.question));
+ const unseen=list.filter(q=>!seen.has(q.q));
+ if(unseen.length>=(type==="mixed"?30:20))list=unseen;
+ else if(unseen.length)list=unseen.concat(list.filter(q=>seen.has(q.q)));
+ return list.sort(()=>Math.random()-.5);
+}
+function startPractice(type){
+ stopExamClock();examMode="";examFinished=false;deck=selectDeck(type).slice(0,20);idx=0;examAnswers=0;
+ document.getElementById("activityTitle").textContent=type==="listening"?"Listening Lab":type==="math"?"Math Adventure":type==="vocabulary"?"Vocabulary Builder":"Daily Learning Practice";
+ document.getElementById("activitySubtitle").textContent="20 questions for today · Learn the lesson topic before answering.";
+ show("activity");renderQuestion();
+}
+function startExam(kind){
+ stopExamClock();examMode=kind;examFinished=false;deck=selectDeck("mixed").slice(0,30);idx=0;examAnswers=0;examSeconds=1800;
+ document.getElementById("activityTitle").textContent=kind==="weekly"?"Friday Weekly Exam":kind==="midterm"?"Midterm Practice":"Final Practice";
+ document.getElementById("activitySubtitle").textContent="30 questions · 30 minutes · Score out of 30.";
+ show("activity");startExamClock();renderQuestion();
+}
+function startExamClock(){
+ const el=document.getElementById("examTimer");el.classList.add("active");updateExamClock();
+ examClock=setInterval(()=>{examSeconds--;updateExamClock();if(examSeconds<=0){stopExamClock();finishExam(true)}},1000);
+}
+function updateExamClock(){
+ const el=document.getElementById("examTimer");if(!el)return;
+ const m=Math.floor(examSeconds/60),s=examSeconds%60;el.textContent="⏱ "+String(m).padStart(2,"0")+":"+String(s).padStart(2,"0");
+ if(examSeconds<=300)el.style.background="#ffe2e2";
+}
+function stopExamClock(){if(examClock){clearInterval(examClock);examClock=null}const el=document.getElementById("examTimer");if(el)el.classList.remove("active")}
+function finishExam(timeUp=false){
+ if(examFinished)return;examFinished=true;stopExamClock();
+ const p=profile(child),total=deck.length,score=Math.round(examAnswers/total*30);
+ p.exams.unshift({name:examMode,score:score,date:new Date().toLocaleDateString(),timeLimitMinutes:30,questions:total,timeUp:!!timeUp});save();
+ document.getElementById("activityTitle").textContent=timeUp?"Time is up!":"Exam complete!";
+ document.getElementById("activitySubtitle").textContent="Friday weekly exam · 30 questions · 30-minute limit.";
+ document.querySelector(".question-card").innerHTML=`<h2>🎓 Well done, ${child}!</h2><p>Your score: <b>${score}/30</b></p><p>You answered ${examAnswers} out of ${total} questions correctly.</p><p>${timeUp?"The timer ended and the exam was submitted automatically.":"You completed the exam within the time limit."}</p><button class="btn" onclick="show('exams')">Back to Exam Center</button>`;
+}
+function renderQuestion(){answered=false;let q=deck[idx];document.getElementById("qCategory").textContent=q.cat.toUpperCase()+" · "+q.skill.toUpperCase();
+ const lesson=document.getElementById("lessonNote");
+ if(lesson){lesson.style.display="block";lesson.innerHTML=`<b>Lesson topic: ${q.skill}</b><span>Review the topic, think about the example, and choose the answer that best fits the lesson.</span>`;}
+ if(!examMode)document.getElementById("examTimer").classList.remove("active");document.getElementById("qCount").textContent="Question "+(idx+1)+" of "+deck.length;document.getElementById("qProgress").style.width=(idx/deck.length*100)+"%";document.getElementById("qText").textContent=q.q;document.getElementById("feedback").innerHTML="";document.getElementById("earned").textContent="";document.getElementById("nextBtn").disabled=true;document.getElementById("nextBtn").textContent=idx===deck.length-1?(examMode?"Finish exam":"Finish practice"):"Next question →";document.getElementById("qOptions").innerHTML=q.a.map((a,i)=>`<button class="option" onclick="answer(${i})">${String.fromCharCode(65+i)}. ${a}</button>`).join("");}
 function answer(n){if(answered)return;answered=true;let q=deck[idx],p=profile(child),ok=n===q.c;document.querySelectorAll(".option").forEach((b,i)=>{b.disabled=true;if(i===q.c)b.classList.add("correct");if(i===n&&!ok)b.classList.add("wrong")});p.done++;if(ok){p.correct++;p.stars+=10;examAnswers++;document.getElementById("feedback").innerHTML=`<div class="feedback good">🎉 Excellent work! ${q.why}</div>`;document.getElementById("earned").textContent="+10 stars ⭐";say("Great job! "+q.why)}else{p.weak[q.skill]=(p.weak[q.skill]||0)+1;document.getElementById("feedback").innerHTML=`<div class="feedback try">Good try! ${q.why} You can learn from every answer.</div>`;document.getElementById("earned").textContent="No stars this time. Keep going!";say("Good try. "+q.why)}p.history.unshift({date:new Date().toLocaleString(),category:q.cat,skill:q.skill,question:q.q,correct:ok});if(p.correct>=10&&!p.badges.includes("Bright Thinker"))p.badges.push("Bright Thinker");save();document.getElementById("nextBtn").disabled=false}
-function nextQuestion(){if(idx<deck.length-1){idx++;renderQuestion()}else{let p=profile(child);if(examMode){let score=Math.round(examAnswers/deck.length*30);p.exams.unshift({name:examMode,score:score,date:new Date().toLocaleDateString()});save();document.getElementById("activityTitle").textContent="Test complete!";document.getElementById("activitySubtitle").textContent="You finished your "+examMode+" practice.";document.querySelector(".question-card").innerHTML=`<h2>🎓 Well done, ${child}!</h2><p>Your score: <b>${score}/30</b></p><p>You answered ${examAnswers} out of ${deck.length} questions correctly.</p><button class="btn" onclick="show('exams')">Back to Exam Center</button>`}else{document.getElementById("activityTitle").textContent="Mission complete!";document.getElementById("activitySubtitle").textContent="You did a great job today.";document.querySelector(".question-card").innerHTML=`<h2>🌟 Fantastic work, ${child}!</h2><p>You completed ${deck.length} questions and earned stars for your correct answers.</p><button class="btn" onclick="show('home')">Back to Home</button>`}}}
+function nextQuestion(){
+ if(examFinished)return;
+ if(idx<deck.length-1){idx++;renderQuestion();return}
+ if(examMode){finishExam(false)}
+ else{
+  document.getElementById("activityTitle").textContent="Mission complete!";
+  document.getElementById("activitySubtitle").textContent="You did a great job today.";
+  document.querySelector(".question-card").innerHTML=`<h2>🌟 Fantastic work, ${child}!</h2><p>You completed ${deck.length} questions and earned stars for your correct answers.</p><button class="btn" onclick="show('home')">Back to Home</button>`;
+ }
+}
 function say(t){if(!("speechSynthesis"in window))return;window.speechSynthesis.cancel();let u=new SpeechSynthesisUtterance(t);u.lang="en-US";let vs=window.speechSynthesis.getVoices();let v=vs.find(x=>x.lang==="en-US");if(v)u.voice=v;window.speechSynthesis.speak(u)}
 function readQuestion(){let q=deck[idx];say(q.say||q.q)}
 function speakPrompt(){say(document.getElementById("speakPrompt").textContent)}
@@ -230,67 +286,42 @@ const topics=["Introduce yourself","My family","At school","My favorite animal",
 document.getElementById("topics").innerHTML=topics.map((t,i)=>`<button class="btn soft" onclick="setTopic(${i})">${t}</button>`).join("");
 const prompts=["What is your name? How old are you? What do you like to do?","Tell me about your family. Who lives with you?","What is your favorite subject at school? Why?","Describe your favorite animal. What does it eat?","What is your favorite food? How does it taste?","Which sport do you like? Tell me how to play it.","What do you do in the morning before school?","Imagine you are shopping. What would you like to buy?","Where would you like to travel? What would you see?","Tell me anything interesting about your day."];
 function setTopic(i){document.getElementById("speakPrompt").textContent=prompts[i];speakPrompt()}
-function renderParent(){let names=["Adam","Eileen"];document.getElementById("parentStats").innerHTML=names.map(n=>{let p=profile(n);let acc=p.done?Math.round(p.correct/p.done*100):0;return `<div style="margin-bottom:18px"><b>${n}</b><p class="muted small">${p.done} activities · ${p.correct} correct · ${p.stars} stars · ${acc}% accuracy</p><div class="progress"><i style="width:${acc}%"></i></div></div>`}).join("");let p=profile(child);document.getElementById("weakSkills").innerHTML=Object.entries(p.weak).sort((a,b)=>b[1]-a[1]).slice(0,8).map(([s,n])=>`<p>• ${s} <span class="muted">(${n} missed)</span></p>`).join("")||"No practice gaps recorded yet.";document.getElementById("history").innerHTML=p.history.slice(0,20).map(h=>`<tr><td>${h.date}</td><td>${h.category}</td><td>${h.skill}</td><td>${h.correct?"✅":"↻"}</td></tr>`).join("");if(!p.history.length)document.getElementById("history").innerHTML="<p class='muted'>No activity yet.</p>";else document.getElementById("history").innerHTML="<table><tr><th>Date</th><th>Subject</th><th>Skill</th><th>Result</th></tr>"+document.getElementById("history").innerHTML+"</table>"}
+function renderParent(){
+ let names=["Adam","Eileen"];
+ document.getElementById("parentStats").innerHTML=names.map(n=>{
+  let p=profile(n),acc=p.done?Math.round(p.correct/p.done*100):0;
+  return `<div style="margin-bottom:18px"><b>${n}</b><p class="muted small">${p.done} questions answered · ${p.correct} correct · ${p.stars} stars · ${acc}% accuracy</p><div class="progress"><i style="width:${acc}%"></i></div></div>`
+ }).join("");
+ let p=profile(child);
+ const skillStats={};
+ (p.history||[]).forEach(h=>{
+  const key=(h.category||"Other")+"|||"+(h.skill||"General");
+  if(!skillStats[key])skillStats[key]={category:h.category||"Other",skill:h.skill||"General",attempts:0,correct:0};
+  skillStats[key].attempts++;if(h.correct)skillStats[key].correct++;
+ });
+ const allSkills=Object.values(skillStats).map(s=>{
+  s.accuracy=Math.round(s.correct/s.attempts*100);
+  s.level=s.attempts<3?"Building evidence":s.accuracy>=80?"Strength":s.accuracy>=60?"On track":"Needs support";
+  s.color=s.level==="Strength"?"#23845b":s.level==="On track"?"#3d79bd":s.level==="Needs support"?"#c45b55":"#9a8b63";
+  return s;
+ }).sort((a,b)=>a.category.localeCompare(b.category)||a.skill.localeCompare(b.skill));
+ const map=document.getElementById("skillMap");
+ if(map){
+  if(!allSkills.length)map.innerHTML="<p class='muted'>No skill data yet. Complete daily practice or a weekly exam to build the learner map.</p>";
+  else{
+   const groups={};allSkills.forEach(s=>(groups[s.category]??=[]).push(s));
+   map.innerHTML=Object.entries(groups).map(([cat,skills])=>`<div style="margin:16px 0"><h4>${cat}</h4><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:10px">${skills.map(s=>`<div style="border:1px solid #e6e4f1;border-radius:12px;padding:12px"><div class="row between"><b>${s.skill}</b><span style="font-size:11px;font-weight:700;color:${s.color}">${s.level}</span></div><div class="progress" style="margin:9px 0"><i style="width:${s.accuracy}%;background:${s.color}"></i></div><div class="muted small">${s.accuracy}% accuracy · ${s.correct}/${s.attempts} correct</div></div>`).join("")}</div></div>`).join("");
+  }
+ }
+ const weak=allSkills.filter(s=>s.level==="Needs support"||s.level==="Building evidence").sort((a,b)=>(a.accuracy-b.accuracy));
+ document.getElementById("weakSkills").innerHTML=weak.length?weak.slice(0,8).map(s=>`<p>• <b>${s.skill}</b> <span class="muted">(${s.level}${s.attempts>=3?`, ${s.accuracy}%`:`, ${s.attempts} attempts`})</span></p>`).join(""):"No priority gaps identified yet. Keep practicing to build reliable evidence.";
+ let rows=p.history.slice(0,20).map(h=>`<tr><td>${h.date}</td><td>${h.category}</td><td>${h.skill}</td><td>${h.correct?"✅":"↻"}</td></tr>`).join("");
+ document.getElementById("history").innerHTML=p.history.length?"<table><tr><th>Date</th><th>Subject</th><th>Skill</th><th>Result</th></tr>"+rows+"</table>":"<p class='muted'>No activity yet.</p>";
+}
 function renderExams(){let p=profile(child);document.getElementById("examHistory").innerHTML=p.exams.length?"<table><tr><th>Test</th><th>Score</th><th>Date</th></tr>"+p.exams.map(e=>`<tr><td>${e.name}</td><td>${e.score}/30</td><td>${e.date}</td></tr>`).join("")+"</table>":"No exams completed yet."}
 function renderRewards(){let p=profile(child);document.getElementById("rewardStars").textContent=p.stars+" stars";document.getElementById("trophies").innerHTML=(p.badges.length?p.badges.map(b=>`<span class="reward">🏅 ${b}</span>`).join(""):"<span class='muted'>Complete activities to earn your first badge.</span>");document.getElementById("roomItems").innerHTML=p.items.map(x=>`<span class="reward">✨ ${x}</span>`).join("")||"<span class='muted small'>Your room is waiting for decorations!</span>"}
 function buyItem(name,cost){let p=profile(child);if(p.items.includes(name)){alert("You already unlocked this item!");return}if(p.stars<cost){alert("Keep practicing to earn more stars!");return}p.stars-=cost;p.items.push(name);save();renderRewards()}
 function exportData(){let blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"}),a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="bright-path-progress.json";a.click();URL.revokeObjectURL(a.href)}
 function resetCurrent(){if(confirm("Reset all progress for "+child+" on this browser?")){delete data[child];save();renderParent()}}
 refresh();renderSkills();renderMath();renderExams();
-</script>
-<script>
-/* Bright Path runtime guard and resilient login controls */
-(function () {
-  function showRuntimeError(message) {
-    var box = document.getElementById("runtimeNotice");
-    if (!box) {
-      box = document.createElement("div");
-      box.id = "runtimeNotice";
-      box.style.cssText = "position:fixed;left:12px;right:12px;bottom:12px;z-index:99999;background:#fff0f3;color:#9b1c3c;border:2px solid #e78aa0;border-radius:12px;padding:12px;font:14px Arial;box-shadow:0 8px 30px #0002";
-      document.body.appendChild(box);
-    }
-    box.textContent = "Bright Path needs a page refresh. " + message;
-  }
-  window.addEventListener("error", function (event) {
-    showRuntimeError(event.message || "A script error occurred.");
-  });
-  window.addEventListener("unhandledrejection", function (event) {
-    showRuntimeError(event.reason && event.reason.message ? event.reason.message : "A background script error occurred.");
-  });
-
-  function bindAuthControls() {
-    var setup = document.querySelector("#authGate .auth-card button.btn.soft");
-    var adam = document.getElementById("authAdam");
-    var eileen = document.getElementById("authEileen");
-    var submit = document.getElementById("authSubmit");
-    if (setup) {
-      setup.removeAttribute("onclick");
-      setup.type = "button";
-      setup.addEventListener("click", function (e) {
-        e.preventDefault();
-        try {
-          if (typeof window.showSetup === "function") window.showSetup();
-          else showRuntimeError("The account setup function did not load. Please refresh the page.");
-        } catch (err) { showRuntimeError(err.message); }
-      });
-    }
-    if (adam) { adam.removeAttribute("onclick"); adam.type = "button"; adam.addEventListener("click", function(){ try { window.chooseLoginChild("Adam"); } catch(err){showRuntimeError(err.message);} }); }
-    if (eileen) { eileen.removeAttribute("onclick"); eileen.type = "button"; eileen.addEventListener("click", function(){ try { window.chooseLoginChild("Eileen"); } catch(err){showRuntimeError(err.message);} }); }
-    if (submit) {
-      submit.removeAttribute("onclick");
-      submit.type = "button";
-      submit.addEventListener("click", function(e){
-        e.preventDefault();
-        try {
-          if (typeof window.submitLogin === "function") window.submitLogin();
-          else showRuntimeError("The sign-in function did not load. Please refresh the page.");
-        } catch(err){showRuntimeError(err.message);}
-      });
-    }
-  }
-  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", bindAuthControls);
-  else bindAuthControls();
-})();
-</script>
-
-</body></html>
+</script></body></html>
