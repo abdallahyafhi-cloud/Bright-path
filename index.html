@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bright Path | Grade 2 Learning World</title>
+<style>
+:root{--ink:#24304a;--muted:#71809b;--purple:#7256d8;--blue:#397ce8;--pink:#ff7ca8;--mint:#e9f8f1;--paper:#f5f6fc;--line:#e9ecf5;--gold:#ffbf47;--white:#fff;--shadow:0 10px 28px #26365b0c}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);font-family:Inter,"Segoe UI",Arial,sans-serif;color:var(--ink)}button,input,select,textarea{font:inherit}button{cursor:pointer}
+header{height:68px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 4%;position:sticky;top:0;z-index:5}
+.logo{font-size:21px;font-weight:950;color:var(--purple);letter-spacing:-.7px}.logo span{color:var(--ink)}
+.header-right{display:flex;gap:12px;align-items:center}.pill{border-radius:30px;padding:8px 12px;background:#f4f1ff;color:var(--purple);font-weight:800;font-size:12px;border:0}
+.layout{display:grid;grid-template-columns:230px 1fr;max-width:1440px;margin:auto;min-height:calc(100vh - 68px)}
+aside{padding:24px 15px;background:#fff;border-right:1px solid var(--line)}.child-switch{display:flex;gap:8px;margin-bottom:22px}.child-switch button{flex:1;padding:10px 5px;border:1px solid var(--line);background:#fff;border-radius:12px;font-size:12px;font-weight:800}.child-switch button.active{border-color:var(--purple);background:#f3f0ff;color:var(--purple)}
+.navlabel{font-size:10px;color:#9aa4b8;font-weight:900;letter-spacing:1.3px;padding:8px 10px}.nav{display:flex;flex-direction:column;gap:5px}.nav button{border:0;background:transparent;text-align:left;padding:12px;border-radius:12px;color:#65718a;font-weight:750}.nav button.active,.nav button:hover{background:#f1efff;color:var(--purple)}
+main{padding:28px;min-width:0}.welcome{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:22px}.welcome h1{font-size:28px;margin:0 0 6px;letter-spacing:-.7px}.muted{color:var(--muted)}.welcome p{margin:0}.streak{background:#fff6e5;border:1px solid #ffe4ae;padding:12px 16px;border-radius:15px;color:#98630b;font-weight:850;white-space:nowrap}
+.grid{display:grid;gap:15px}.stats{grid-template-columns:repeat(4,1fr);margin:18px 0 25px}.stat,.card,.panel{background:#fff;border:1px solid #edf0f7;border-radius:19px;box-shadow:var(--shadow)}.stat{padding:17px}.stat small{color:var(--muted);font-weight:750}.stat strong{display:block;font-size:25px;margin-top:7px}.stat em{float:right;font-style:normal;font-size:22px}
+.section-title{display:flex;justify-content:space-between;align-items:center;margin:25px 0 13px}.section-title h2{margin:0;font-size:20px}.subjects{grid-template-columns:repeat(3,1fr)}.subject{padding:19px;min-height:158px;text-align:left;border:1px solid #edf0f7;background:#fff;border-radius:19px;box-shadow:var(--shadow);transition:.15s}.subject:hover{transform:translateY(-2px);border-color:#cfc5ff}.subject .icon{font-size:28px}.subject h3{margin:12px 0 5px}.subject p{margin:0;color:var(--muted);font-size:13px;line-height:1.45}
+.btn{border:0;background:var(--purple);color:white;padding:11px 16px;border-radius:12px;font-weight:850}.btn.blue{background:var(--blue)}.btn.pink{background:var(--pink)}.btn.soft{background:#f1efff;color:var(--purple)}.btn.ghost{background:#f4f6fb;color:#56627b}.btn:disabled{opacity:.45;cursor:not-allowed}
+.panel{padding:20px;margin-top:18px}.row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.between{justify-content:space-between}.progress{height:9px;border-radius:20px;background:#edf0f7;overflow:hidden}.progress i{display:block;height:100%;background:linear-gradient(90deg,#7256d8,#a68cff);border-radius:20px}
+.hidden{display:none!important}.two{grid-template-columns:1.3fr .7fr}.skill-list{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.skill{padding:13px;border:1px solid var(--line);border-radius:13px;background:#fff;text-align:left}.skill b{display:block;font-size:13px}.skill small{color:var(--muted)}
+.question-card{max-width:780px;margin:18px auto;background:#fff;border-radius:22px;padding:25px;box-shadow:var(--shadow);border:1px solid var(--line)}.qmeta{display:flex;justify-content:space-between;color:var(--muted);font-size:12px;font-weight:800}.qtext{font-size:24px;line-height:1.35;font-weight:850;margin:23px 0}.options{display:grid;grid-template-columns:1fr 1fr;gap:11px}.option{background:#f7f8fc;border:2px solid #edf0f7;border-radius:13px;padding:14px;text-align:left;font-weight:750;color:var(--ink)}.option:hover{border-color:#b9aaff}.option.correct{border-color:#37b981;background:#eaf9f2}.option.wrong{border-color:#ff829f;background:#fff0f4}.feedback{padding:13px;border-radius:13px;margin-top:15px;font-weight:800}.good{background:#eaf9f2;color:#18764f}.try{background:#fff6e5;color:#91600c}
+input,select,textarea{border:1px solid #dfe4ef;border-radius:11px;padding:11px;background:white;color:var(--ink);width:100%}textarea{min-height:100px;resize:vertical}.small{font-size:12px}.badge{display:inline-block;padding:6px 9px;border-radius:30px;background:#f1efff;color:var(--purple);font-size:11px;font-weight:850}
+table{width:100%;border-collapse:collapse}th,td{text-align:left;padding:12px;border-bottom:1px solid var(--line);font-size:13px}th{color:var(--muted)}
+.avatar{width:65px;height:65px;border-radius:18px;background:#eae5ff;display:grid;place-items:center;font-size:36px}.profile{display:flex;align-items:center;gap:13px}
+.reward{display:inline-flex;align-items:center;gap:7px;background:#fff8e8;padding:10px 13px;border-radius:13px;font-weight:850;color:#98630b;margin:5px}
+footer{color:#98a1b4;font-size:11px;text-align:center;padding:24px}
+@media(max-width:850px){.layout{grid-template-columns:1fr}aside{border-right:0;border-bottom:1px solid var(--line);padding:10px 15px}.nav{flex-direction:row;overflow:auto}.nav button{white-space:nowrap;padding:9px}.navlabel,.child-switch{display:none}main{padding:19px}.subjects{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){header{padding:0 14px}.header-right .pill:nth-child(2){display:none}.welcome{align-items:flex-start;flex-direction:column}.welcome h1{font-size:23px}.stats{grid-template-columns:repeat(2,1fr)}.subjects{grid-template-columns:1fr 1fr}.subject{padding:14px}.options,.skill-list,.two{grid-template-columns:1fr}.question-card{padding:17px}.qtext{font-size:20px}}
+
+#authGate{position:fixed;inset:0;background:linear-gradient(135deg,#f2efff,#f8fbff 55%,#fff0f5);z-index:20;display:grid;place-items:center;padding:18px}
+.auth-card{width:min(440px,100%);background:#fff;border:1px solid #eceefa;border-radius:24px;padding:26px;box-shadow:0 24px 70px #26365b22}
+.auth-card h1{margin:0 0 7px;font-size:25px}.auth-card p{color:var(--muted);line-height:1.5}
+.auth-tabs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:18px 0}
+.auth-tabs button{border:1px solid var(--line);border-radius:12px;padding:11px;background:#fff;font-weight:850}
+.auth-tabs button.active{background:#f1efff;color:var(--purple);border-color:#cfc5ff}
+.auth-field{margin:12px 0}.auth-field label{display:block;font-size:12px;font-weight:850;color:#66728a;margin-bottom:6px}
+.auth-error{color:#b4234a;font-size:12px;font-weight:750;min-height:18px}
+.auth-note{font-size:11px;color:#8b95a8!important}
+</style></head>
+<body>
+
+<div id="authGate"><div class="auth-card">
+<div class="logo">BRIGHT <span>PATH</span> ✦</div>
+<h1 id="authHeading">Welcome back!</h1><p id="authIntro">Sign in to your own learning account.</p>
+<div class="auth-tabs">
+<button id="authAdam" class="active" onclick="chooseLoginChild('Adam')">🦔 Adam</button>
+<button id="authEileen" onclick="chooseLoginChild('Eileen')">🐰 Eileen</button>
+</div>
+<div class="auth-field"><label for="authUsername">USERNAME</label><input id="authUsername" autocomplete="username" placeholder="Enter your username"></div>
+<div class="auth-field"><label for="authPassword">PASSWORD</label><input id="authPassword" type="password" autocomplete="current-password" placeholder="Enter your password" onkeydown="if(event.key==='Enter')submitLogin()"></div>
+<div class="auth-error" id="authError"></div>
+<button class="btn" style="width:100%" id="authSubmit" onclick="submitLogin()">Sign in</button>
+<p class="auth-note">First time here? A parent can create both child accounts below. Accounts in this prototype are saved only in this browser.</p>
+<button class="btn soft" style="width:100%" onclick="showSetup()">Parent: Create / reset child accounts</button>
+</div></div>
+<div id="appShell" class="hidden">
+<header><div class="logo">BRIGHT <span>PATH</span> ✦</div><div class="header-right"><span class="pill">GRADE 2 LEARNING WORLD</span><button class="pill" onclick="show('parent')">Parent Dashboard</button><button class="pill" onclick="signOut()">Sign out</button></div></header>
+<div class="layout">
+<aside>
+ <div class="child-switch"><button id="adamBtn" class="active" onclick="setChild('Adam')">🦔 Adam</button><button id="eileenBtn" onclick="setChild('Eileen')">🐰 Eileen</button></div>
+ <div class="navlabel">LEARNING</div><nav class="nav">
+ <button data-page="home" class="active" onclick="show('home')">🏠 Home</button>
+ <button data-page="english" onclick="show('english')">📖 English</button>
+ <button data-page="math" onclick="show('math')">➗ Math</button>
+ <button data-page="vocabulary" onclick="show('vocabulary')">🔤 Vocabulary</button>
+ <button data-page="listening" onclick="show('listening')">🎧 Listening</button>
+ <button data-page="speaking" onclick="show('speaking')">🎙️ Speaking</button>
+ <button data-page="exams" onclick="show('exams')">📝 Exams</button>
+ <div class="navlabel">MY WORLD</div>
+ <button data-page="rewards" onclick="show('rewards')">🎁 Rewards & Room</button>
+ <button data-page="parent" onclick="show('parent')">📊 Parent Dashboard</button>
+ </nav>
+</aside>
+<main>
+<section id="home" class="page">
+ <div class="welcome"><div><h1 id="welcomeTitle">Welcome back, Adam!</h1><p class="muted">Ready for a brilliant learning adventure?</p></div><div class="streak">🔥 3-day learning streak</div></div>
+ <div class="profile card" style="padding:15px"><div class="avatar" id="heroAvatar">🦔</div><div><b id="heroName">Adam</b><div class="muted small">Grade 2 · Learning Explorer</div><span class="badge" id="worldName">SONIC WORLD</span></div><div style="margin-left:auto;text-align:right"><b id="homeStars">0 ⭐</b><div class="muted small">My stars</div></div></div>
+ <div class="grid stats"><div class="stat"><em>⭐</em><small>Stars earned</small><strong id="statStars">0</strong></div><div class="stat"><em>🎯</em><small>Activities done</small><strong id="statDone">0</strong></div><div class="stat"><em>📚</em><small>Correct answers</small><strong id="statCorrect">0</strong></div><div class="stat"><em>🏆</em><small>Badges</small><strong id="statBadges">0</strong></div></div>
+ <div class="section-title"><h2>Choose your learning adventure</h2></div>
+ <div class="grid subjects">
+ <button class="subject" onclick="show('english')"><span class="icon">📖</span><h3>English</h3><p>Reading, writing, grammar and comprehension.</p></button>
+ <button class="subject" onclick="show('math')"><span class="icon">➗</span><h3>Math</h3><p>Numbers, operations, geometry and problem solving.</p></button>
+ <button class="subject" onclick="show('vocabulary')"><span class="icon">🔤</span><h3>Vocabulary</h3><p>Learn new words and build word power.</p></button>
+ <button class="subject" onclick="show('listening')"><span class="icon">🎧</span><h3>Listening</h3><p>Listen to American English and answer.</p></button>
+ <button class="subject" onclick="show('speaking')"><span class="icon">🎙️</span><h3>Speaking</h3><p>Practice speaking and pronunciation.</p></button>
+ <button class="subject" onclick="show('exams')"><span class="icon">📝</span><h3>Exams</h3><p>Weekly quizzes, midterm and final practice.</p></button>
+ </div>
+ <div class="panel"><div class="section-title"><h2>Today's Mission</h2><span class="badge">+30 stars possible</span></div><p class="muted">Complete one English activity, one Math activity and one listening challenge. Mistakes help your brain grow. Keep trying!</p><button class="btn" onclick="startPractice('mixed')">Start today's mission →</button></div>
+</section>
+
+<section id="english" class="page hidden">
+ <div class="welcome"><div><h1>English Learning</h1><p class="muted">Explore your Grade 2 English skills.</p></div><span class="badge">IXL Grade 2 skill map</span></div>
+ <div class="grid skill-list" id="englishSkills"></div>
+</section>
+<section id="math" class="page hidden">
+ <div class="welcome"><div><h1>Math Adventure</h1><p class="muted">Practice important Grade 2 math skills.</p></div><span class="badge">Grade 2 practice strands</span></div>
+ <div class="grid skill-list" id="mathSkills"></div>
+ <div class="panel"><p class="muted small">Math skill groups are a starter framework until the exact school/IXL Math skill screenshots are added.</p></div>
+</section>
+<section id="vocabulary" class="page hidden"><div class="welcome"><div><h1>Vocabulary Builder</h1><p class="muted">Choose the best word for each sentence.</p></div></div><div id="vocabLaunch"></div></section>
+<section id="listening" class="page hidden"><div class="welcome"><div><h1>Listening Lab</h1><p class="muted">Listen carefully, then choose your answer.</p></div></div><div class="panel"><p>Questions can be read aloud using the American English voice available in your browser.</p><button class="btn" onclick="startPractice('listening')">Start listening practice 🎧</button></div></section>
+<section id="speaking" class="page hidden"><div class="welcome"><div><h1>Speaking Studio</h1><p class="muted">Speak clearly and confidently.</p></div></div><div class="panel"><h3>Today's conversation</h3><p id="speakPrompt">Tell me about your favorite animal. What does it look like? What does it eat?</p><div class="row"><button class="btn pink" onclick="speakPrompt()">🔊 Hear the prompt</button><button class="btn" onclick="startMic()">🎙️ Start speaking</button><button class="btn soft" onclick="stopMic()">Stop</button></div><p class="muted small">Your browser may ask for microphone permission. Speech recognition availability depends on your browser and device.</p><textarea id="speechText" placeholder="Your recognized speech will appear here. You can also type your answer..."></textarea><div class="row"><button class="btn blue" onclick="checkSpeaking()">Check my practice</button><span id="speechFeedback" class="muted small"></span></div></div><div class="panel"><h3>Conversation topics</h3><div class="row" id="topics"></div></div></section>
+<section id="exams" class="page hidden"><div class="welcome"><div><h1>Exam Center</h1><p class="muted">Practice tests and track your results.</p></div></div><div class="grid subjects"><button class="subject" onclick="startExam('weekly')"><span class="icon">🗓️</span><h3>Weekly Quiz</h3><p>10 questions · Score out of 30.</p></button><button class="subject" onclick="startExam('midterm')"><span class="icon">📘</span><h3>Midterm Practice</h3><p>30 questions · Score out of 30.</p></button><button class="subject" onclick="startExam('final')"><span class="icon">🎓</span><h3>Final Practice</h3><p>30 questions · Score out of 30.</p></button></div><div class="panel"><h3>My exam history</h3><div id="examHistory" class="muted">No exams completed yet.</div></div></section>
+<section id="rewards" class="page hidden"><div class="welcome"><div><h1>Rewards & My Room</h1><p class="muted">Your effort earns stars. Keep collecting!</p></div></div><div class="panel"><h2>⭐ Star Treasure</h2><div class="reward" id="rewardStars">0 stars</div><p class="muted">Earn 10 stars for each correct answer. Incorrect answers never remove stars.</p><h3>My trophies</h3><div id="trophies" class="row"></div></div><div class="panel"><h2>🏡 Room Decor</h2><p class="muted">Spend stars to unlock room decorations.</p><div class="row"><button class="btn soft" onclick="buyItem('Rainbow lamp',30)">🌈 Rainbow Lamp · 30 ⭐</button><button class="btn soft" onclick="buyItem('Star rug',50)">🌟 Star Rug · 50 ⭐</button><button class="btn soft" onclick="buyItem('Golden trophy',80)">🏆 Golden Trophy · 80 ⭐</button></div><div id="roomItems" class="row" style="margin-top:15px"></div></div></section>
+<section id="parent" class="page hidden"><div class="welcome"><div><h1>Parent Dashboard</h1><p class="muted">Review progress, accuracy and practice history.</p></div><span class="badge">Family overview</span></div><div class="grid two"><div class="panel"><h3>Learning progress</h3><div id="parentStats"></div></div><div class="panel"><h3>Skills to practice</h3><div id="weakSkills" class="muted small"></div></div></div><div class="panel"><h3>Activity history</h3><div id="history"></div></div><div class="panel"><h3>Parent notes</h3><p class="muted small">This prototype stores progress in this browser on this device. Use export to save a backup.</p><div class="row"><button class="btn soft" onclick="signOut();showSetup()">Manage child accounts</button><button class="btn" onclick="exportData()">Export progress</button><button class="btn ghost" onclick="resetCurrent()">Reset selected learner</button></div></div></section>
+
+<section id="activity" class="page hidden">
+ <div class="welcome"><div><h1 id="activityTitle">Practice Time!</h1><p class="muted" id="activitySubtitle">Choose the correct answer.</p></div><button class="btn ghost" onclick="show('home')">✕ Exit</button></div>
+ <div class="question-card">
+ <div class="qmeta"><span id="qCategory">ENGLISH</span><span id="qCount">Question 1</span></div>
+ <div class="progress" style="margin-top:12px"><i id="qProgress" style="width:0%"></i></div>
+ <div class="qtext" id="qText"></div>
+ <div class="row" style="margin-bottom:13px"><button class="btn soft" onclick="readQuestion()">🔊 Listen</button><span class="muted small">American English voice when available</span></div>
+ <div class="options" id="qOptions"></div>
+ <div id="feedback"></div>
+ <div class="row between" style="margin-top:17px"><span class="muted small" id="earned"></span><button class="btn" id="nextBtn" onclick="nextQuestion()" disabled>Next question →</button></div>
+ </div>
+</section>
+<footer>Bright Path Grade 2 · Learning is an adventure · Progress is saved on this device</footer>
+</main></div></div>
+<script>
+
+let authChild="Adam", authMode="login";
+const authKey="brightPathChildAccounts_v1";
+function readAccounts(){try{return JSON.parse(localStorage.getItem(authKey))||{}}catch(e){return {}}}
+async function hashPassword(password,salt){
+ const enc=new TextEncoder();
+ const key=await crypto.subtle.importKey("raw",enc.encode(password),"PBKDF2",false,["deriveBits"]);
+ const bits=await crypto.subtle.deriveBits({name:"PBKDF2",salt:enc.encode(salt),iterations:120000,hash:"SHA-256"},key,256);
+ return Array.from(new Uint8Array(bits)).map(b=>b.toString(16).padStart(2,"0")).join("");
+}
+function chooseLoginChild(n){authChild=n;document.getElementById("authAdam").classList.toggle("active",n==="Adam");document.getElementById("authEileen").classList.toggle("active",n==="Eileen");document.getElementById("authError").textContent="";document.getElementById("authUsername").value="";document.getElementById("authPassword").value="";}
+function showSetup(){authMode="setup";document.getElementById("authHeading").textContent="Create child accounts";document.getElementById("authIntro").textContent="A parent can set a unique username and password for each child.";document.getElementById("authSubmit").textContent="Save account";document.getElementById("authPassword").value="";document.getElementById("authError").textContent="";document.getElementById("authUsername").placeholder="Choose a username";document.getElementById("authPassword").placeholder="Create a password (8+ characters)";document.getElementById("authPassword").autocomplete="new-password";}
+function showLogin(){authMode="login";document.getElementById("authHeading").textContent="Welcome back!";document.getElementById("authIntro").textContent="Sign in to your own learning account.";document.getElementById("authSubmit").textContent="Sign in";document.getElementById("authUsername").placeholder="Enter your username";document.getElementById("authPassword").placeholder="Enter your password";document.getElementById("authPassword").autocomplete="current-password";document.getElementById("authError").textContent="";}
+async function submitLogin(){
+ const username=document.getElementById("authUsername").value.trim(), password=document.getElementById("authPassword").value, err=document.getElementById("authError");
+ err.style.color="#b4234a";
+ if(!username||!password){err.textContent="Please enter both username and password.";return}
+ if(authMode==="setup"){
+  if(password.length<8){err.textContent="Use at least 8 characters for the password.";return}
+  const accounts=readAccounts(), other=authChild==="Adam"?"Eileen":"Adam";
+  if(accounts[other]&&accounts[other].username.toLowerCase()===username.toLowerCase()){err.textContent="This username is already used by the other child.";return}
+  const salt=(crypto.randomUUID?crypto.randomUUID():String(Date.now())+Math.random());
+  accounts[authChild]={username,salt,hash:await hashPassword(password,salt)};
+  localStorage.setItem(authKey,JSON.stringify(accounts));
+  err.style.color="#18764f";err.textContent=authChild+"'s account saved. Select the other child to create their account.";
+  document.getElementById("authPassword").value="";return;
+ }
+ const account=readAccounts()[authChild];
+ if(!account){err.textContent="No account found. Ask a parent to create this account first.";return}
+ if(account.username.toLowerCase()!==username.toLowerCase()||account.hash!==await hashPassword(password,account.salt)){err.textContent="The username or password is incorrect.";return}
+ child=authChild;document.getElementById("authGate").classList.add("hidden");document.getElementById("appShell").classList.remove("hidden");refresh();show("home");
+}
+function signOut(){document.getElementById("appShell").classList.add("hidden");document.getElementById("authGate").classList.remove("hidden");showLogin();document.getElementById("authPassword").value="";chooseLoginChild(child);}
+
+const englishGroups = [
+["Reading Foundations",["Rhyming","Syllables","Phoneme Manipulation","Consonant Digraphs, Trigraphs, and Silent Letters","Consonant Digraphs and Blends","Short Vowels","Silent e","Vowel Teams","Short and Long Vowel Patterns","Long Vowel Patterns","R-Controlled Vowels","Diphthongs: oi, oy, ou, ow","Variant Vowels","Soft g and c","Open and Closed Syllables","Advanced Syllables","Multisyllabic Words","Affixed Words","High-Frequency and Irregular Words","Decodable Texts"]],
+["Reading Strategies",["Main Idea","Inference and Theme","Author's Purpose","Setting and Character","Sequence","Plot","Cause and Effect","Compare and Contrast","Text Features","Read-along Literary Texts","Read-alone Literary Texts","Read-along Informational Texts","Read-alone Informational Texts"]],
+["Writing Strategies",["Organizing Writing","Topic Sentences","Linking Words","Author's Purpose","Opinion Writing","Descriptive Details","Sentence Variety"]],
+["Vocabulary",["Prefixes and Suffixes","Compound Words","Categories","Synonyms and Antonyms","Homophones and Homonyms","Shades of Meaning","Idioms","Context Clues","Reference Skills"]],
+["Grammar and Mechanics",["Spelling: Drop e, Double consonant, Change y to i","Sentences, Fragments, and Run-ons","Nouns: Common, Proper, Singular, Plural, Possessive","Pronouns: Personal, Subject, Object, Possessive, Reflexive","Verb Types: Action and Helping Verbs","Subject-Verb Agreement","Verb Tense: Present, Past, Future, Regular and Irregular","Articles: A, An, The","Adjectives and Adverbs","Prepositions","Contractions","Punctuation: Commas, Dates, Names of Places","Capitalization: Names, Places, Titles, Days and Months","Abbreviations: Days and Months"]],
+];
+const mathGroups=["Place Value","Addition","Subtraction","Word Problems","Even and Odd Numbers","Skip Counting","Money","Time","Measurement","Data and Graphs","Shapes and Geometry","Fractions"];
+const questions = [
+{cat:"Grammar",skill:"Nouns",q:"Which word is a noun?",a:["quickly","teacher","under","beautiful"],c:1,why:"A teacher is a person, so it is a noun."},
+{cat:"Grammar",skill:"Verbs",q:"Choose the action verb: The rabbit hops.",a:["rabbit","the","hops","little"],c:2,why:"Hops tells what the rabbit does."},
+{cat:"Grammar",skill:"Pronouns",q:"Choose the correct pronoun: Adam is kind. ___ helps his friend.",a:["He","They","We","It"],c:0,why:"He replaces the name Adam."},
+{cat:"Grammar",skill:"Articles",q:"Choose the correct article: I ate ___ apple.",a:["a","an","thee","are"],c:1,why:"Use an before a vowel sound."},
+{cat:"Grammar",skill:"Punctuation",q:"Which sentence has correct punctuation?",a:["where are you.","Where are you?","where are you?","Where are you."],c:1,why:"A question begins with a capital letter and ends with a question mark."},
+{cat:"Grammar",skill:"Adjectives",q:"Which word describes the flower? The pretty flower smells sweet.",a:["flower","smells","pretty","the"],c:2,why:"Pretty describes the flower."},
+{cat:"Reading",skill:"Main Idea",q:"Mia waters plants every day. She pulls weeds and gives them sunlight. What is the main idea?",a:["Mia cares for plants.","Mia likes rainy days.","Plants can talk.","Mia plays soccer."],c:0,why:"The details explain how Mia takes care of plants."},
+{cat:"Reading",skill:"Sequence",q:"What should happen first when making a sandwich?",a:["Eat it","Put it on a plate","Get the bread","Wash the plate"],c:2,why:"First, get the bread."},
+{cat:"Reading",skill:"Cause and Effect",q:"It rained all night, so the playground was wet. What caused the playground to be wet?",a:["The sun","The rain","The children","The wind"],c:1,why:"The rain made the playground wet."},
+{cat:"Reading",skill:"Inference",q:"Sam put on his coat and took an umbrella. What is most likely true?",a:["It may be cold or rainy.","He is going swimming.","It is very hot.","He is going to bed."],c:0,why:"A coat and umbrella suggest cold or rainy weather."},
+{cat:"Vocabulary",skill:"Synonyms",q:"Which word means almost the same as happy?",a:["glad","angry","tired","tiny"],c:0,why:"Glad and happy have similar meanings."},
+{cat:"Vocabulary",skill:"Antonyms",q:"What is the opposite of noisy?",a:["loud","quiet","busy","bright"],c:1,why:"Quiet is the opposite of noisy."},
+{cat:"Vocabulary",skill:"Compound Words",q:"Which two words make the compound word sunflower?",a:["sun + flower","sun + light","flower + pot","star + flower"],c:0,why:"Sunflower is made from sun and flower."},
+{cat:"Vocabulary",skill:"Prefixes",q:"What does the prefix un- mean in unhappy?",a:["again","not","before","small"],c:1,why:"Un- can mean not."},
+{cat:"Vocabulary",skill:"Context Clues",q:"The puppy was tiny, so it fit in a small box. What does tiny mean?",a:["very big","very small","very loud","very fast"],c:1,why:"The clue small tells us tiny means very small."},
+{cat:"Spelling",skill:"Vowels",q:"Choose the word with a long a sound.",a:["cat","cake","map","hat"],c:1,why:"The a in cake says its name."},
+{cat:"Spelling",skill:"Vowel Teams",q:"Which word has the vowel team ee?",a:["tree","train","boat","cloud"],c:0,why:"Tree has the vowel team ee."},
+{cat:"Spelling",skill:"Digraphs",q:"Which word begins with the /sh/ sound?",a:["ship","chip","thin","when"],c:0,why:"The letters sh make the /sh/ sound."},
+{cat:"Writing",skill:"Sentences",q:"Which group of words is a complete sentence?",a:["Under the table","The happy dog barked.","Because it was sunny","Running very fast"],c:1,why:"A complete sentence has a subject and a predicate."},
+{cat:"Writing",skill:"Linking Words",q:"Choose the best linking word: I was hungry, ___ I ate lunch.",a:["but","so","or","because"],c:1,why:"So connects the reason and result."},
+{cat:"Math",skill:"Place Value",q:"In 347, what is the value of the digit 4?",a:["4","40","400","14"],c:1,why:"The 4 is in the tens place, so its value is 40."},
+{cat:"Math",skill:"Addition",q:"What is 28 + 17?",a:["35","45","46","55"],c:1,why:"28 + 17 = 45."},
+{cat:"Math",skill:"Subtraction",q:"What is 63 − 25?",a:["38","42","48","32"],c:0,why:"63 − 25 = 38."},
+{cat:"Math",skill:"Word Problems",q:"Lina has 12 stickers. Her friend gives her 8 more. How many stickers does she have?",a:["18","19","20","21"],c:2,why:"12 + 8 = 20."},
+{cat:"Math",skill:"Even and Odd",q:"Which number is even?",a:["13","17","22","29"],c:2,why:"22 can be split into two equal groups."},
+{cat:"Math",skill:"Skip Counting",q:"What number comes next? 5, 10, 15, 20, __",a:["21","23","25","30"],c:2,why:"The pattern adds 5 each time."},
+{cat:"Math",skill:"Time",q:"The minute hand points to 12 and the hour hand points to 7. What time is it?",a:["12:07","7:00","7:12","6:00"],c:1,why:"The time is seven o'clock."},
+{cat:"Math",skill:"Money",q:"How much are two 25-cent coins worth?",a:["25 cents","40 cents","50 cents","75 cents"],c:2,why:"25 + 25 = 50 cents."},
+{cat:"Math",skill:"Geometry",q:"How many sides does a hexagon have?",a:["4","5","6","8"],c:2,why:"A hexagon has six sides."},
+{cat:"Math",skill:"Measurement",q:"Which unit is best for measuring the length of a pencil?",a:["Centimeters","Liters","Kilograms","Hours"],c:0,why:"Centimeters measure length."},
+{cat:"Math",skill:"Fractions",q:"A pizza is cut into 4 equal pieces. You eat 1 piece. What fraction did you eat?",a:["1/2","1/3","1/4","4/1"],c:2,why:"One out of four equal pieces is one fourth."},
+{cat:"Listening",skill:"Listening",q:"Listen to the sentence: 'The blue bird is sitting in the tree.' What color is the bird?",a:["Green","Blue","Yellow","Red"],c:1,why:"The bird is blue.",say:"The blue bird is sitting in the tree."},
+{cat:"Listening",skill:"Listening",q:"Listen: 'Tom has three red balloons.' How many balloons does Tom have?",a:["Two","Three","Four","Five"],c:1,why:"Tom has three balloons.",say:"Tom has three red balloons."},
+{cat:"Listening",skill:"Listening",q:"Listen: 'The children play soccer after school.' What do the children play?",a:["Tennis","Basketball","Soccer","Baseball"],c:2,why:"They play soccer.",say:"The children play soccer after school."},
+{cat:"Vocabulary",skill:"Homophones",q:"Choose the correct word: I can ___ the birds sing.",a:["here","hear","hair","her"],c:1,why:"Hear means to listen."},
+{cat:"Grammar",skill:"Subject-Verb Agreement",q:"Choose the correct sentence.",a:["She walk to school.","She walks to school.","She walking to school.","She walkes to school."],c:1,why:"With she, use walks in the present tense."},
+{cat:"Reading",skill:"Compare and Contrast",q:"A cat has fur. A fish has scales. What is one difference?",a:["Both are animals.","A cat has fur; a fish has scales.","Both live in trees.","Neither needs food."],c:1,why:"The sentence gives a difference between the animals."},
+{cat:"Grammar",skill:"Prepositions",q:"The book is ___ the table.",a:["on","quickly","happy","jump"],c:0,why:"On tells where the book is."},
+{cat:"Writing",skill:"Opinion",q:"Which sentence gives an opinion?",a:["A week has seven days.","I think summer is the best season.","A dog has four legs.","The sun is a star."],c:1,why:"I think signals a personal opinion."},
+{cat:"Math",skill:"Data and Graphs",q:"A chart shows 6 children like apples and 4 like pears. How many children are counted?",a:["2","8","10","12"],c:2,why:"6 + 4 = 10."}
+];
+let child="Adam",page="home",deck=[],idx=0,answered=false,examMode="",examAnswers=0,recognition=null;
+const storeKey="brightPathGrade2_v1";
+function load(){try{return JSON.parse(localStorage.getItem(storeKey))||{}}catch(e){return {}}}
+let data=load();
+function profile(n){if(!data[n])data[n]={stars:0,done:0,correct:0,badges:[],history:[],exams:[],weak:{},items:[]};return data[n]}
+function save(){localStorage.setItem(storeKey,JSON.stringify(data));refresh()}
+function setChild(n){if(n!==child){signOut();chooseLoginChild(n);return}child=n;document.getElementById("adamBtn").classList.toggle("active",n==="Adam");document.getElementById("eileenBtn").classList.toggle("active",n==="Eileen");refresh();show(page)}
+function show(id){page=id;document.querySelectorAll(".page").forEach(x=>x.classList.add("hidden"));document.getElementById(id).classList.remove("hidden");document.querySelectorAll(".nav button").forEach(x=>x.classList.toggle("active",x.dataset.page===id));if(id==="parent")renderParent();if(id==="exams")renderExams();if(id==="rewards")renderRewards();if(id==="english")renderSkills();if(id==="math")renderMath();if(id==="vocabulary")document.getElementById("vocabLaunch").innerHTML='<div class="panel"><p>Practice word meanings, synonyms, antonyms, prefixes and context clues.</p><button class="btn" onclick="startPractice(\\'vocabulary\\')">Start vocabulary practice</button></div>'}
+function refresh(){let p=profile(child),sonic=child==="Adam";document.getElementById("welcomeTitle").textContent="Welcome back, "+child+"!";document.getElementById("heroName").textContent=child;document.getElementById("heroAvatar").textContent=sonic?"🦔":"🐰";document.getElementById("worldName").textContent=sonic?"SONIC WORLD":"KUROMI WORLD";document.getElementById("homeStars").textContent=p.stars+" ⭐";document.getElementById("statStars").textContent=p.stars;document.getElementById("statDone").textContent=p.done;document.getElementById("statCorrect").textContent=p.correct;document.getElementById("statBadges").textContent=p.badges.length;document.getElementById("rewardStars").textContent=p.stars+" stars"}
+function renderSkills(){document.getElementById("englishSkills").innerHTML=englishGroups.map(([g,skills])=>`<div class="panel"><b>${g}</b><p class="muted small">${skills.length} skill areas</p><div class="row" style="margin-top:10px"><button class="btn soft" onclick="startPractice('english')">Practice this area →</button></div><details style="margin-top:10px"><summary class="small muted">View skill list</summary><p class="small">${skills.join(" · ")}</p></details></div>`).join("")}
+function renderMath(){document.getElementById("mathSkills").innerHTML=mathGroups.map(g=>`<button class="skill" onclick="startPractice('math')"><b>${g}</b><small>Grade 2 · Practice</small></button>`).join("")}
+function selectDeck(type){let list=questions.filter(q=>type==="mixed"?true:type==="english"?q.cat!=="Math"&&q.cat!=="Listening":type==="math"?q.cat==="Math":type==="vocabulary"?q.cat==="Vocabulary":type==="listening"?q.cat==="Listening":true);if(!list.length)list=questions;return list.sort(()=>Math.random()-.5)}
+function startPractice(type){examMode="";deck=selectDeck(type).slice(0,10);idx=0;examAnswers=0;document.getElementById("activityTitle").textContent=type==="listening"?"Listening Lab":type==="math"?"Math Adventure":type==="vocabulary"?"Vocabulary Builder":"Practice Time!";document.getElementById("activitySubtitle").textContent="Choose the best answer. You earn 10 stars for each correct answer.";show("activity");renderQuestion()}
+function startExam(kind){examMode=kind;deck=selectDeck("mixed").slice(0,kind==="weekly"?10:30);idx=0;examAnswers=0;document.getElementById("activityTitle").textContent=kind==="weekly"?"Weekly Quiz":kind==="midterm"?"Midterm Practice":"Final Practice";document.getElementById("activitySubtitle").textContent=deck.length+" questions · Final score out of 30.";show("activity");renderQuestion()}
+function renderQuestion(){answered=false;let q=deck[idx];document.getElementById("qCategory").textContent=q.cat.toUpperCase()+" · "+q.skill.toUpperCase();document.getElementById("qCount").textContent="Question "+(idx+1)+" of "+deck.length;document.getElementById("qProgress").style.width=(idx/deck.length*100)+"%";document.getElementById("qText").textContent=q.q;document.getElementById("feedback").innerHTML="";document.getElementById("earned").textContent="";document.getElementById("nextBtn").disabled=true;document.getElementById("nextBtn").textContent=idx===deck.length-1?(examMode?"Finish exam":"Finish practice"):"Next question →";document.getElementById("qOptions").innerHTML=q.a.map((a,i)=>`<button class="option" onclick="answer(${i})">${String.fromCharCode(65+i)}. ${a}</button>`).join("");}
+function answer(n){if(answered)return;answered=true;let q=deck[idx],p=profile(child),ok=n===q.c;document.querySelectorAll(".option").forEach((b,i)=>{b.disabled=true;if(i===q.c)b.classList.add("correct");if(i===n&&!ok)b.classList.add("wrong")});p.done++;if(ok){p.correct++;p.stars+=10;examAnswers++;document.getElementById("feedback").innerHTML=`<div class="feedback good">🎉 Excellent work! ${q.why}</div>`;document.getElementById("earned").textContent="+10 stars ⭐";say("Great job! "+q.why)}else{p.weak[q.skill]=(p.weak[q.skill]||0)+1;document.getElementById("feedback").innerHTML=`<div class="feedback try">Good try! ${q.why} You can learn from every answer.</div>`;document.getElementById("earned").textContent="No stars this time. Keep going!";say("Good try. "+q.why)}p.history.unshift({date:new Date().toLocaleString(),category:q.cat,skill:q.skill,question:q.q,correct:ok});if(p.correct>=10&&!p.badges.includes("Bright Thinker"))p.badges.push("Bright Thinker");save();document.getElementById("nextBtn").disabled=false}
+function nextQuestion(){if(idx<deck.length-1){idx++;renderQuestion()}else{let p=profile(child);if(examMode){let score=Math.round(examAnswers/deck.length*30);p.exams.unshift({name:examMode,score:score,date:new Date().toLocaleDateString()});save();document.getElementById("activityTitle").textContent="Test complete!";document.getElementById("activitySubtitle").textContent="You finished your "+examMode+" practice.";document.querySelector(".question-card").innerHTML=`<h2>🎓 Well done, ${child}!</h2><p>Your score: <b>${score}/30</b></p><p>You answered ${examAnswers} out of ${deck.length} questions correctly.</p><button class="btn" onclick="show('exams')">Back to Exam Center</button>`}else{document.getElementById("activityTitle").textContent="Mission complete!";document.getElementById("activitySubtitle").textContent="You did a great job today.";document.querySelector(".question-card").innerHTML=`<h2>🌟 Fantastic work, ${child}!</h2><p>You completed ${deck.length} questions and earned stars for your correct answers.</p><button class="btn" onclick="show('home')">Back to Home</button>`}}}
+function say(t){if(!("speechSynthesis"in window))return;window.speechSynthesis.cancel();let u=new SpeechSynthesisUtterance(t);u.lang="en-US";let vs=window.speechSynthesis.getVoices();let v=vs.find(x=>x.lang==="en-US");if(v)u.voice=v;window.speechSynthesis.speak(u)}
+function readQuestion(){let q=deck[idx];say(q.say||q.q)}
+function speakPrompt(){say(document.getElementById("speakPrompt").textContent)}
+function startMic(){let SR=window.SpeechRecognition||window.webkitSpeechRecognition;if(!SR){document.getElementById("speechFeedback").textContent="Speech recognition is not supported in this browser. Please type your answer.";return}recognition=new SR();recognition.lang="en-US";recognition.interimResults=true;recognition.onresult=e=>{let s="";for(let i=e.resultIndex;i<e.results.length;i++)s+=e.results[i][0].transcript;document.getElementById("speechText").value=s};recognition.onerror=()=>document.getElementById("speechFeedback").textContent="Microphone recognition stopped. You can type your answer.";recognition.start();document.getElementById("speechFeedback").textContent="Listening..."}
+function stopMic(){if(recognition)recognition.stop();document.getElementById("speechFeedback").textContent="Recording stopped."}
+function checkSpeaking(){let t=document.getElementById("speechText").value.trim();document.getElementById("speechFeedback").textContent=t.length>20?"Great effort! Try saying it again slowly and clearly.":"Good start! Add more details and try a complete sentence.";if(t.length>20){let p=profile(child);p.stars+=5;p.done++;p.history.unshift({date:new Date().toLocaleString(),category:"Speaking",skill:"Conversation",question:"Speaking practice",correct:true});save()}}
+const topics=["Introduce yourself","My family","At school","My favorite animal","Food I like","Sports and games","My daily routine","Shopping","Travel and holidays","Free conversation"];
+document.getElementById("topics").innerHTML=topics.map((t,i)=>`<button class="btn soft" onclick="setTopic(${i})">${t}</button>`).join("");
+const prompts=["What is your name? How old are you? What do you like to do?","Tell me about your family. Who lives with you?","What is your favorite subject at school? Why?","Describe your favorite animal. What does it eat?","What is your favorite food? How does it taste?","Which sport do you like? Tell me how to play it.","What do you do in the morning before school?","Imagine you are shopping. What would you like to buy?","Where would you like to travel? What would you see?","Tell me anything interesting about your day."];
+function setTopic(i){document.getElementById("speakPrompt").textContent=prompts[i];speakPrompt()}
+function renderParent(){let names=["Adam","Eileen"];document.getElementById("parentStats").innerHTML=names.map(n=>{let p=profile(n);let acc=p.done?Math.round(p.correct/p.done*100):0;return `<div style="margin-bottom:18px"><b>${n}</b><p class="muted small">${p.done} activities · ${p.correct} correct · ${p.stars} stars · ${acc}% accuracy</p><div class="progress"><i style="width:${acc}%"></i></div></div>`}).join("");let p=profile(child);document.getElementById("weakSkills").innerHTML=Object.entries(p.weak).sort((a,b)=>b[1]-a[1]).slice(0,8).map(([s,n])=>`<p>• ${s} <span class="muted">(${n} missed)</span></p>`).join("")||"No practice gaps recorded yet.";document.getElementById("history").innerHTML=p.history.slice(0,20).map(h=>`<tr><td>${h.date}</td><td>${h.category}</td><td>${h.skill}</td><td>${h.correct?"✅":"↻"}</td></tr>`).join("");if(!p.history.length)document.getElementById("history").innerHTML="<p class='muted'>No activity yet.</p>";else document.getElementById("history").innerHTML="<table><tr><th>Date</th><th>Subject</th><th>Skill</th><th>Result</th></tr>"+document.getElementById("history").innerHTML+"</table>"}
+function renderExams(){let p=profile(child);document.getElementById("examHistory").innerHTML=p.exams.length?"<table><tr><th>Test</th><th>Score</th><th>Date</th></tr>"+p.exams.map(e=>`<tr><td>${e.name}</td><td>${e.score}/30</td><td>${e.date}</td></tr>`).join("")+"</table>":"No exams completed yet."}
+function renderRewards(){let p=profile(child);document.getElementById("rewardStars").textContent=p.stars+" stars";document.getElementById("trophies").innerHTML=(p.badges.length?p.badges.map(b=>`<span class="reward">🏅 ${b}</span>`).join(""):"<span class='muted'>Complete activities to earn your first badge.</span>");document.getElementById("roomItems").innerHTML=p.items.map(x=>`<span class="reward">✨ ${x}</span>`).join("")||"<span class='muted small'>Your room is waiting for decorations!</span>"}
+function buyItem(name,cost){let p=profile(child);if(p.items.includes(name)){alert("You already unlocked this item!");return}if(p.stars<cost){alert("Keep practicing to earn more stars!");return}p.stars-=cost;p.items.push(name);save();renderRewards()}
+function exportData(){let blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"}),a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="bright-path-progress.json";a.click();URL.revokeObjectURL(a.href)}
+function resetCurrent(){if(confirm("Reset all progress for "+child+" on this browser?")){delete data[child];save();renderParent()}}
+refresh();renderSkills();renderMath();renderExams();
+</script></body></html>
